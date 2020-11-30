@@ -1,3 +1,3 @@
 # Caliban
 
-### Just started a new Spring Kotlin project with no idea what will become of it, but we are going on a journey...
+### A Kotlin/Gradle/Postgres/Spring Boot skeleton created for me to easily pull down and bootstrap a new app to test things out for this specific tech stack
