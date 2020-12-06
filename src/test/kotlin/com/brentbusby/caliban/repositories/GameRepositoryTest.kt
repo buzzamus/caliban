@@ -1,7 +1,9 @@
 package com.brentbusby.caliban.repositories
 
+import com.brentbusby.caliban.config.AWSConfiguration
 import com.brentbusby.caliban.entities.Game
 import com.brentbusby.caliban.entities.Genre
+import com.brentbusby.caliban.storage.S3Client
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
