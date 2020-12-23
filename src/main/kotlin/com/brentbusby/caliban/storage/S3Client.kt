@@ -10,10 +10,14 @@ import com.amazonaws.services.s3.model.S3Object
 import com.amazonaws.services.s3.model.S3ObjectInputStream
 import com.brentbusby.caliban.config.AWSConfiguration
 import org.apache.commons.io.FileUtils
+import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.stereotype.Service
 import java.io.File
 
-class S3Client {
-    val awsConfiguration = AWSConfiguration()
+@Service
+class S3Client @Autowired constructor(
+        private val awsConfiguration: AWSConfiguration
+) {
     val awsCreds = BasicAWSCredentials(awsConfiguration.accessKey, awsConfiguration.secretKey)
 
     val s3Client = AmazonS3ClientBuilder
@@ -48,5 +52,9 @@ class S3Client {
         val s3Object: S3Object = s3Client.getObject(bucketName, name)
         val inputStream: S3ObjectInputStream = s3Object.objectContent
         FileUtils.copyInputStreamToFile(inputStream, File(name))
+    }
+
+    fun getKey(): String {
+        return awsConfiguration.accessKey
     }
 }
