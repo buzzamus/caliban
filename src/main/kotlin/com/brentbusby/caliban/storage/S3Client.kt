@@ -4,6 +4,7 @@ import com.amazonaws.auth.AWSStaticCredentialsProvider
 import com.amazonaws.auth.BasicAWSCredentials
 import com.amazonaws.regions.Regions
 import com.amazonaws.services.s3.AmazonS3ClientBuilder
+import com.amazonaws.services.s3.event.S3EventNotification
 import com.amazonaws.services.s3.model.Bucket
 import com.amazonaws.services.s3.model.ObjectListing
 import com.amazonaws.services.s3.model.S3Object
@@ -28,11 +29,8 @@ class S3Client @Autowired constructor(
 
     private val bucketName = awsConfiguration.bucketName
 
-    fun listBuckets(){
-        val buckets: List<Bucket> = s3Client.listBuckets()
-        for (bucket in buckets) {
-            println(bucket.name)
-        }
+    fun listBuckets(): List<Bucket>{
+        return s3Client.listBuckets()
     }
 
     fun upload() {

@@ -12,7 +12,10 @@ import org.springframework.context.annotation.PropertySource
 class AWSConfiguration {
     @Value("\${caliban.aws.accessKey}")
     lateinit var accessKey: String
+
+    @Value("\${caliban.aws.secretKey}")
     lateinit var secretKey: String
+
     @Value("\${caliban.aws.bucketName}")
     lateinit var bucketName: String
 
