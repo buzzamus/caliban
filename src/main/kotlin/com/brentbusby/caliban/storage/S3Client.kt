@@ -32,16 +32,14 @@ class S3Client @Autowired constructor(
         return s3Client.listBuckets()
     }
 
-    fun upload() {
-        val file = "input.csv"
-        val filePath = File("Input.csv")
-        s3Client.putObject(bucketName, file, filePath)
+    fun upload(file: File) {
+        s3Client.putObject(bucketName, file.name, file)
     }
 
     fun listContent() {
         val objectListing: ObjectListing = s3Client.listObjects(bucketName)
-        for (thingy in objectListing.objectSummaries) {
-            println(thingy.getKey())
+        for (obj in objectListing.objectSummaries) {
+            println(obj.getKey())
         }
     }
 
