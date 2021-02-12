@@ -20,7 +20,7 @@ class S3Client @Autowired constructor(
 ) {
     val awsCreds = BasicAWSCredentials(awsConfiguration.accessKey, awsConfiguration.secretKey)
 
-    val s3Client = AmazonS3ClientBuilder
+    val client = AmazonS3ClientBuilder
         .standard()
         .withCredentials(AWSStaticCredentialsProvider(awsCreds))
         .withRegion(Regions.US_EAST_2)
@@ -29,22 +29,31 @@ class S3Client @Autowired constructor(
     private val bucketName = awsConfiguration.bucketName
 
     fun listBuckets(): List<Bucket>{
-        return s3Client.listBuckets()
+        return client.listBuckets()
     }
 
     fun upload(file: File) {
-        s3Client.putObject(bucketName, file.name, file)
+        client.putObject(bucketName, file.name, file)
     }
 
     fun listContent() {
-        val objectListing: ObjectListing = s3Client.listObjects(bucketName)
+        val objectListing: ObjectListing = client.listObjects(bucketName)
         for (obj in objectListing.objectSummaries) {
             println(obj.getKey())
         }
     }
 
+    fun getContent(): List<String> {
+        var list = mutableListOf<String>()
+        var contents = client.listObjects(bucketName)
+        for (content in contents.objectSummaries) {
+            list.add(content.key)
+        }
+        return list
+    }
+
     fun download(name: String) {
-        val s3Object: S3Object = s3Client.getObject(bucketName, name)
+        val s3Object: S3Object = client.getObject(bucketName, name)
         val inputStream: S3ObjectInputStream = s3Object.objectContent
         FileUtils.copyInputStreamToFile(inputStream, File(name))
     }
