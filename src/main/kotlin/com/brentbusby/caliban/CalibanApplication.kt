@@ -8,8 +8,6 @@ import org.springframework.boot.runApplication
 @ConfigurationPropertiesScan("com.brentbusby.caliban.config")
 class CalibanApplication
 
-
-
 fun main(args: Array<String>) {
 	runApplication<CalibanApplication>(*args)
 }

@@ -16,7 +16,7 @@ import java.io.File
 
 @Service
 class S3Client @Autowired constructor(
-        private val awsConfiguration: AWSConfiguration
+    private val awsConfiguration: AWSConfiguration
 ) {
     val awsCreds = BasicAWSCredentials(awsConfiguration.accessKey, awsConfiguration.secretKey)
 

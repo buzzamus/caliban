@@ -5,9 +5,11 @@ import com.brentbusby.caliban.repositories.GameRepository
 import com.brentbusby.caliban.storage.S3Client
 import com.github.doyaaaaaken.kotlincsv.dsl.csvWriter
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.stereotype.Service
 import java.io.File
 import java.time.LocalDate
 
+@Service
 class GameCsvWriter @Autowired constructor(
     private val awsConfiguration: AWSConfiguration,
     private val gameRepository: GameRepository

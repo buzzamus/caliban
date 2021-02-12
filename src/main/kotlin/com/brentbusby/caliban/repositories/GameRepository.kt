@@ -1,10 +1,12 @@
 package com.brentbusby.caliban.repositories
 
 import com.brentbusby.caliban.entities.Game
+import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.data.jpa.repository.Query
-import org.springframework.data.repository.CrudRepository
+import org.springframework.stereotype.Repository
 
-interface GameRepository : CrudRepository<Game, Long> {
+@Repository
+interface GameRepository : JpaRepository<Game, Long> {
     fun findByTitle(title: String): Game?
 
     @Query(value = "select count(id) as gameCount, studio as studio from Game group by studio", nativeQuery = true)
