@@ -24,6 +24,7 @@ allOpen {
 dependencies {
 	implementation(platform("com.amazonaws:aws-java-sdk-bom:1.11.163"))
 	implementation("com.amazonaws:aws-java-sdk-s3")
+	implementation("com.github.doyaaaaaken:kotlin-csv-jvm:0.15.0")
 	implementation("org.apache.directory.studio:org.apache.commons.io:2.4")
 	implementation("org.springframework.boot:spring-boot-starter")
 	implementation("org.springframework.boot:spring-boot-starter-data-jdbc")
