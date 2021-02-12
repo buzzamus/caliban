@@ -17,7 +17,7 @@ class GameRepositoryTest @Autowired constructor(
 ) {
 
     @Test
-    fun `it just works`() {
+    fun `it saves and then finds the game by title`() {
         val game = Game("Gears of War 5", Genre.shooter, "the Coalition", 2019)
         entityManager.persist(game)
         entityManager.flush()
@@ -26,7 +26,7 @@ class GameRepositoryTest @Autowired constructor(
     }
 
     @Test
-    fun `it really freaking works`() {
+    fun `it aggregates the releases by studio`() {
         val game = Game("Halo", Genre.shooter, "Bungie", 2001)
         val game2 = Game("Halo 2", Genre.shooter, "Bungie", 2004)
         val game3 = Game("Halo 3", Genre.shooter, "Bungie", 2007)
