@@ -31,9 +31,12 @@ class GameAggregatorCsvWriter @Autowired constructor(
         csvWriter().open(tempFile) {
             writeRow(GameAggregatorCsvWriter.headers[0], GameAggregatorCsvWriter.headers[1])
             aggregatedGames.forEach {
-                it.studio,
-                it.gameCount
+                writeRow(
+                    it.studio,
+                    it.gameCount
+                )
             }
         }
+        s3Client.upload(tempFile)
     }
 }
