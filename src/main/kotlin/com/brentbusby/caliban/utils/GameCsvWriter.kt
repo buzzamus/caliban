@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 import java.io.File
 import java.time.LocalDate
+import javax.swing.border.TitledBorder
 
 @Service
 class GameCsvWriter @Autowired constructor(
@@ -17,11 +18,11 @@ class GameCsvWriter @Autowired constructor(
 ) {
 
     companion object {
-        private val headers = listOf<String>(
-            "title",
-            "studio",
-            "genre",
-            "year released"
+        private val headers = mapOf<String, String>(
+            "TITLE" to "title",
+            "STUDIO" to "studio",
+            "GENRE" to "genre",
+            "YEAR" to "year released"
         )
     }
 
@@ -34,10 +35,10 @@ class GameCsvWriter @Autowired constructor(
 
         csvWriter().open(tempFile) {
             writeRow(
-                GameCsvWriter.headers[0],
-                GameCsvWriter.headers[1],
-                GameCsvWriter.headers[2],
-                GameCsvWriter.headers[3]
+                GameCsvWriter.headers["TITLE"],
+                GameCsvWriter.headers["STUDIO"],
+                GameCsvWriter.headers["GENRE"],
+                GameCsvWriter.headers["YEAR"]
             )
             allGames.forEach {
                 writeRow(

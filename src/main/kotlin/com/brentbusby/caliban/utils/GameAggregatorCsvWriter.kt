@@ -15,9 +15,9 @@ class GameAggregatorCsvWriter @Autowired constructor(
     private val gameRepository: GameRepository
 ) {
     companion object {
-        private val headers = listOf<String>(
-            "studio",
-            "number of titles"
+        private val headers = mapOf<String, String>(
+            "STUDIO" to "studio",
+            "COUNT" to "number of titles"
         )
     }
 
@@ -29,7 +29,10 @@ class GameAggregatorCsvWriter @Autowired constructor(
         tempFile.deleteOnExit()
 
         csvWriter().open(tempFile) {
-            writeRow(GameAggregatorCsvWriter.headers[0], GameAggregatorCsvWriter.headers[1])
+            writeRow(
+                GameAggregatorCsvWriter.headers["STUDIO"],
+                GameAggregatorCsvWriter.headers["COUNT"]
+            )
             aggregatedGames.forEach {
                 writeRow(
                     it.studio,
