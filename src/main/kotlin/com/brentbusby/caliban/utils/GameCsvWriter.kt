@@ -1,7 +1,6 @@
 package com.brentbusby.caliban.utils
 
 import com.brentbusby.caliban.config.AWSConfiguration
-import com.brentbusby.caliban.entities.Game
 import com.brentbusby.caliban.repositories.GameRepository
 import com.brentbusby.caliban.storage.S3Client
 import com.github.doyaaaaaken.kotlincsv.dsl.csvWriter
@@ -9,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 import java.io.File
 import java.time.LocalDate
-import javax.swing.border.TitledBorder
 
 @Service
 class GameCsvWriter @Autowired constructor(
