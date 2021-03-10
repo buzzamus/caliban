@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager
+import org.springframework.data.domain.PageRequest
 
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
@@ -36,5 +37,18 @@ class GameRepositoryTest @Autowired constructor(
         entityManager.flush()
         val results = gameRepository.aggregateReleasesByStudio()
         Assertions.assertEquals(3, results[0].gameCount)
+    }
+
+    @Test
+    fun `it finds the game by title and returns pages`() {
+        var games = listOf<Game>(
+            Game("Halo 4", Genre.shooter, "343 Industries", 2012),
+            Game("Halo 5", Genre.shooter, "343 Industries", 2015),
+            Game("Halo Infinite", Genre.shooter, "343 Industries", 2021)
+        )
+        gameRepository.saveAll(games)
+        val pageable = PageRequest.of(0, 2)
+        val pageOfGames = gameRepository.findByStudio("343 Industries", pageable)
+        Assertions.assertEquals(2, pageOfGames.totalPages)
     }
 }
